@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>LIST รายชื่อผู้มุ่งหวัง 150 รายชื่อ - MANHA</title>
+<style>
+  :root{
+    --red:#a30f0f;
+    --red2:#7d0909;
+    --soft:#fff7f7;
+    --line:#e4caca;
+    --text:#222;
+    --muted:#666;
+    --green:#176b3a;
+    --gold:#9c6b00;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Thai",Tahoma,Arial,sans-serif;
+    color:var(--text);
+    background:#f7f7f7;
+  }
+  .wrap{max-width:1180px;margin:auto;padding:14px}
+  .hero{
+    background:linear-gradient(135deg,var(--red2),var(--red));
+    color:#fff;border-radius:18px;padding:20px 18px;
+    box-shadow:0 8px 24px rgba(120,0,0,.16);
+  }
+  h1{font-size:clamp(24px,5vw,38px);margin:0 0 6px;text-align:center}
+  .sub{text-align:center;opacity:.92}
+  .legend,.summary,.card{
+    background:#fff;border-radius:16px;margin-top:14px;padding:14px;
+    box-shadow:0 4px 14px rgba(0,0,0,.06);
+  }
+  .legend-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px
+  }
+  .legend-item{
+    border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--soft)
+  }
+  .legend-item b{color:var(--red)}
+  .legend-item small{display:block;color:var(--muted);margin-top:3px;line-height:1.4}
+  .toolbar{
+    display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:14px 0
+  }
+  button,.file-label{
+    border:0;border-radius:10px;padding:10px 13px;font-weight:700;cursor:pointer;
+    background:var(--red);color:white;
+  }
+  button.secondary,.file-label.secondary{background:#ececec;color:#222}
+  button.danger{background:#555}
+  input[type="search"]{
+    flex:1;min-width:190px;border:1px solid #ccc;border-radius:10px;padding:11px 12px;font-size:16px
+  }
+  .summary-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px
+  }
+  .sum{
+    border-radius:12px;padding:12px;text-align:center;border:1px solid #e5e5e5;background:#fafafa
+  }
+  .sum strong{display:block;font-size:24px;margin-top:4px}
+  .sum.s5{background:#eaf7ef;color:var(--green)}
+  .sum.s4{background:#f2f8ed;color:#3c6a1e}
+  .sum.s3{background:#fff6da;color:var(--gold)}
+  .sum.s2{background:#fff0e7;color:#a44900}
+  .sum.s1{background:#f6ecec;color:#7b3131}
+  .table-wrap{overflow:auto;border-radius:12px;border:1px solid #ddd}
+  table{width:100%;border-collapse:collapse;min-width:840px;background:#fff}
+  thead th{
+    position:sticky;top:0;z-index:3;background:var(--red);color:#fff;
+    padding:10px 6px;font-size:14px
+  }
+  td{border-bottom:1px solid #eee;padding:7px 6px;text-align:center}
+  tbody tr:nth-child(even){background:#fffafa}
+  td.name,td.note{text-align:left}
+  input.name-input,input.note-input{
+    width:100%;border:1px solid #ddd;border-radius:8px;padding:8px;font-size:15px;background:#fff
+  }
+  .star{
+    width:34px;height:34px;border-radius:9px;border:1px solid #ddd;background:#fff;color:#bbb;
+    font-size:20px;line-height:1;cursor:pointer;padding:0
+  }
+  .star.on{background:#ffe5e5;color:var(--red);border-color:#d9a3a3}
+  .score{
+    min-width:34px;display:inline-block;border-radius:999px;padding:5px 9px;font-weight:800;background:#eee
+  }
+  .score.s5{background:#dff4e7;color:#145a31}
+  .score.s4{background:#eaf3df;color:#3b641f}
+  .score.s3{background:#fff1bf;color:#8a6200}
+  .score.s2{background:#ffe4d4;color:#9a470c}
+  .score.s1,.score.s0{background:#eee;color:#666}
+  .save-state{font-size:13px;color:var(--muted);margin-left:auto}
+  .footer{text-align:center;color:#777;font-size:13px;padding:16px}
+  .hint{color:#666;font-size:13px;line-height:1.5;margin-top:8px}
+  .hidden{display:none!important}
+  @media (max-width:800px){
+    .legend-grid{grid-template-columns:1fr 1fr}
+    .summary-grid{grid-template-columns:repeat(2,1fr)}
+    .sum:last-child{grid-column:1/-1}
+    .wrap{padding:10px}
+    .hero{border-radius:14px}
+  }
+  @media print{
+    .toolbar,.footer,.hint{display:none}
+    body{background:#fff}
+    .wrap{max-width:none;padding:0}
+    .legend,.summary,.card,.hero{box-shadow:none;border-radius:0}
+    .table-wrap{overflow:visible;border:none}
+    table{min-width:0;font-size:10px}
+    input{border:none!important;padding:0!important}
+    .star{border:none;background:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <h1>LIST รายชื่อผู้มุ่งหวัง 150 รายชื่อ</h1>
+    <div class="sub">MANHA Prospect List — กรอกชื่อ กดดาว และระบบรวมคะแนนให้อัตโนมัติ</div>
+  </section>
+
+  <section class="legend">
+    <b>เกณฑ์ MANHA</b>
+    <div class="legend-grid">
+      <div class="legend-item"><b>M — Money</b><small>เงิน / รายได้<br>มีความสามารถในการชำระเบี้ย</small></div>
+      <div class="legend-item"><b>A — Authority</b><small>อำนาจการตัดสินใจ<br>มีอำนาจตัดสินใจซื้อ</small></div>
+      <div class="legend-item"><b>N — Needs</b><small>ความต้องการ<br>มีความต้องการประกันชีวิต</small></div>
+      <div class="legend-item"><b>H — Health</b><small>สุขภาพ<br>มีสุขภาพอยู่ในเกณฑ์รับประกัน</small></div>
+      <div class="legend-item"><b>A — Age</b><small>อายุ<br>อายุอยู่ในเกณฑ์ที่รับประกัน</small></div>
+    </div>
+  </section>
+
+  <section class="summary">
+    <b>สรุปคะแนนอัตโนมัติ</b>
+    <div class="summary-grid">
+      <div class="sum s5">5 คะแนน<strong id="sum5">0</strong></div>
+      <div class="sum s4">4 คะแนน<strong id="sum4">0</strong></div>
+      <div class="sum s3">3 คะแนน<strong id="sum3">0</strong></div>
+      <div class="sum s2">2 คะแนน<strong id="sum2">0</strong></div>
+      <div class="sum s1">0–1 คะแนน<strong id="sum1">150</strong></div>
+    </div>
+    <div class="hint">ข้อมูลจะบันทึกไว้ในเบราว์เซอร์เครื่องนี้อัตโนมัติ ไม่ต้องสมัครสมาชิกและไม่ต้องใช้ Excel</div>
+  </section>
+
+  <section class="card">
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="ค้นหาชื่อหรือบันทึก..." />
+      <button class="secondary" id="showHigh">ดูเฉพาะ 4–5 คะแนน</button>
+      <button class="secondary" id="showAll">แสดงทั้งหมด</button>
+      <button id="exportBtn">สำรองข้อมูล</button>
+      <label class="file-label secondary">นำเข้าข้อมูล<input id="importFile" type="file" accept=".json,application/json" hidden></label>
+      <button class="danger" id="clearBtn">ล้างทั้งหมด</button>
+      <span class="save-state" id="saveState">บันทึกแล้ว</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ลำดับ</th>
+            <th style="min-width:190px">ชื่อ</th>
+            <th>M</th><th>A</th><th>N</th><th>H</th><th>A</th>
+            <th>คะแนน</th>
+            <th style="min-width:220px">บันทึกช่วยจำ</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="footer">MANHA 150 รายชื่อ • ใช้งานได้ฟรีบน Safari / Chrome / Edge</div>
+</div>
+
+<script>
+const KEY = "manha150_v1";
+let onlyHigh = false;
+let data = load();
+
+function blankRow(i){
+  return {id:i+1,name:"",stars:[false,false,false,false,false],note:""};
+}
+function load(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(KEY));
+    if(Array.isArray(saved) && saved.length===150) return saved;
+  }catch(e){}
+  return Array.from({length:150},(_,i)=>blankRow(i));
+}
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(data));
+  const s=document.getElementById("saveState");
+  s.textContent="บันทึกแล้ว";
+}
+function score(row){ return row.stars.filter(Boolean).length; }
+
+function render(){
+  const q=document.getElementById("search").value.trim().toLowerCase();
+  const tbody=document.getElementById("tbody");
+  tbody.innerHTML="";
+  data.forEach((row,idx)=>{
+    const sc=score(row);
+    const match=(row.name+" "+row.note).toLowerCase().includes(q);
+    if(!match) return;
+    if(onlyHigh && sc<4) return;
+
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${row.id}</td>
+      <td class="name"><input class="name-input" data-i="${idx}" value="${escapeHtml(row.name)}" placeholder="กรอกชื่อ"></td>
+      ${row.stars.map((on,j)=>`<td><button class="star ${on?"on":""}" data-i="${idx}" data-j="${j}" aria-label="เกณฑ์ ${j+1}">★</button></td>`).join("")}
+      <td><span class="score s${sc}">${sc}</span></td>
+      <td class="note"><input class="note-input" data-i="${idx}" value="${escapeHtml(row.note)}" placeholder="อาชีพ / ความต้องการ / วันนัดติดตาม"></td>
+    `;
+    tbody.appendChild(tr);
+  });
+  updateSummary();
+}
+
+function updateSummary(){
+  let c={0:0,1:0,2:0,3:0,4:0,5:0};
+  data.forEach(r=>c[score(r)]++);
+  document.getElementById("sum5").textContent=c[5];
+  document.getElementById("sum4").textContent=c[4];
+  document.getElementById("sum3").textContent=c[3];
+  document.getElementById("sum2").textContent=c[2];
+  document.getElementById("sum1").textContent=c[0]+c[1];
+}
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g,s=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[s]));
+}
+
+document.getElementById("tbody").addEventListener("click",e=>{
+  if(!e.target.classList.contains("star")) return;
+  const i=+e.target.dataset.i, j=+e.target.dataset.j;
+  data[i].stars[j]=!data[i].stars[j];
+  save(); render();
+});
+document.getElementById("tbody").addEventListener("input",e=>{
+  const i=+e.target.dataset.i;
+  if(e.target.classList.contains("name-input")) data[i].name=e.target.value;
+  if(e.target.classList.contains("note-input")) data[i].note=e.target.value;
+  document.getElementById("saveState").textContent="กำลังบันทึก...";
+  clearTimeout(window._st);
+  window._st=setTimeout(()=>{save();updateSummary()},250);
+});
+document.getElementById("search").addEventListener("input",render);
+document.getElementById("showHigh").onclick=()=>{onlyHigh=true;render()};
+document.getElementById("showAll").onclick=()=>{onlyHigh=false;render()};
+
+document.getElementById("exportBtn").onclick=()=>{
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="MANHA_150_backup.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+document.getElementById("importFile").addEventListener("change",async e=>{
+  const f=e.target.files[0];
+  if(!f) return;
+  try{
+    const arr=JSON.parse(await f.text());
+    if(!Array.isArray(arr) || arr.length!==150) throw new Error("รูปแบบไฟล์ไม่ถูกต้อง");
+    data=arr;
+    save(); render();
+    alert("นำเข้าข้อมูลเรียบร้อย");
+  }catch(err){
+    alert("ไม่สามารถนำเข้าไฟล์นี้ได้");
+  }
+  e.target.value="";
+});
+
+document.getElementById("clearBtn").onclick=()=>{
+  if(confirm("ต้องการล้างรายชื่อและคะแนนทั้งหมด 150 รายชื่อใช่หรือไม่?")){
+    data=Array.from({length:150},(_,i)=>blankRow(i));
+    save(); render();
+  }
+};
+
+render();
+</script>
+</body>
+</html>
